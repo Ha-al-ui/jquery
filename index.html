@@ -1,0 +1,89 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <style>
+	body{
+		 background-image: url(Men.jpg);
+		 background-repeat: no-repeat;
+		 background-size: cover;
+		 color: #ffff;
+	}
+	#filter-records{
+		color: black;
+
+	}
+</style> 
+  <title>T-shirt For sale</title>
+</head>
+<body>
+  <div class="container" style="padding:50px 250px;">
+    <h1>The Best Men's T-shirt Brands</h1>
+	<br><br>
+	<form role="form">
+        <div class="form-group">
+          <input type="input" class="form-control input-lg" id="txt-search" placeholder="Type your search character">
+        </div>
+	</form>
+	<div id="filter-records"></div>
+  </div>
+</body>
+</html>
+<script type="text/javascript">
+  $(document).ready(function(){
+    var data = [
+{"id":"1","brands_name":"Boss","brands_price":"55,99 €","brands_size":"S M L XL 2XL","profile_image":"Boss.jpg"},
+{"id":"2","brands_name":"Lacoste","brands_price":"61,95 €","brands_size":"S M L XL 2XL","profile_image":"Lacoste.jpg"},
+{"id":"3","brands_name":"Dolce & Gabbana","brands_price":"49,80 €","brands_size":"S M L XL 2XL","profile_image":"Dolce-Gabbana.png"},
+{"id":"4","brands_name":"Puma","brands_price":" 42,99 €","brands_size":"S M L XL 2XL","profile_image":"Puma.png"},
+{"id":"5","brands_name":"Levi's","brands_price":"30,85 €","brands_size":"S M L XL 2XL","profile_image":"Levi's.png"},
+{"id":"6","brands_name":"Calvin Klein","brands_price":"54,01 €","brands_size":"S M L XL 2XL","profile_image":"Clavin-Klein.png"},
+{"id":"7","brands_name":"Nike","brands_price":"50,62 €","brands_size":"S M L XL 2XL","profile_image":"Nike.jpg"},
+{"id":"8","brands_name":"Adidas","brands_price":"36,68 €","brands_size":"S M L XL 2XL","profile_image":"Adidas.png"},
+{"id":"9","brands_name":"G-STAR RAW","brands_price":"30,49 €","brands_size":"S M L XL 2XL","profile_image":"G-STAR RAW.png"},
+{"id":"10","brands_name":"Superdry","brands_price":"83,50 €","brands_size":"S M L XL 2XL","profile_image":"Superdry.png"},
+{"id":"11","brands_name":"Coq","brands_price":"43,90 €","brands_size":"S M L XL 2XL","profile_image":"Coq.png"},
+{"id":"12","brands_name":"Zara","brands_price":"19,95 €","brands_size":"S M L XL 2XL","profile_image":"Zara.jpg"},
+{"id":"13","brands_name":"Jack & Jones","brands_price":"69,00 €","brands_size":"S M L XL 2XL","profile_image":"Jack-Jones.png"},
+{"id":"14","brands_name":"Kaporal","brands_price":"25,99 €","brands_size":"S M L XL 2XL","profile_image":"Kaporal.jpg"},
+{"id":"15","brands_name":"Carhartt","brands_price":"66,48 €","brands_size":"S M L XL 2XL","profile_image":"Carhartt.png"},
+{"id":"16","brands_name":"Vans","brands_price":"10,00 €","brands_size":"S M L XL 2XL","profile_image":"Vans.jpg"},
+{"id":"17","brands_name":"Fila","brands_price":"39,90 €","brands_size":"S M L XL 2XL","profile_image":"Fila.png"},
+{"id":"18","brands_name":"GANT","brands_price":"15,25 €","brands_size":"S M L XL 2XL","profile_image":"GANT.png"},
+{"id":"19","brands_name":"Pierre Cardin","brands_price":"23,50 €","brands_size":"S M L XL 2XL","profile_image":"Pierre-Cardin.png"},
+{"id":"20","brands_name":"Under Armour","brands_price":"13,19 €","brands_size":"S M L XL 2XL","profile_image":"Under Armour.png"},
+];
+
+$('#txt-search').keyup(function(){
+            var searchField = $(this).val();
+			if(searchField === '')  {
+				$('#filter-records').html('');
+				return;
+			}
+			
+            var regex = new RegExp(searchField, "i");
+            var output = '<div class="row">';
+            var count = 1;
+			  $.each(data, function(key, val){
+				if ((val.brands_price.search(regex) != -1) || (val.brands_name.search(regex) != -1)) {
+				  output += '<div class="col-md-6 well">';
+				  output += '<div class="col-md-3"><img class="img-responsive" src="'+val.profile_image+'" alt="'+ val.brands_name +'" /></div>';
+				  output += '<div class="col-md-7">';
+				  output += '<h5>' + val.brands_name + '</h5>';
+				  output += '<p>' + val.brands_price + '</p>'
+				  output += '</div>';
+				  output += '</div>';
+				  if(count%2 == 0){
+					output += '</div><div class="row">'
+				  }
+				  count++;
+				}
+			  });
+			  output += '</div>';
+			  $('#filter-records').html(output);
+        });
+  });
+</script>
